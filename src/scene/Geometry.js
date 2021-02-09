@@ -88,6 +88,45 @@ const COLOR_SETS = [
     },
 ]
 
+
+export const createSimpleCube = () => {
+
+const texture = new THREE.TextureLoader().load( './img/crate.gif' );
+const material = new THREE.MeshBasicMaterial( {  map: texture } );
+
+const loader = new THREE.CubeTextureLoader();
+        loader.setPath( './img/' );
+        
+        const reflectionCube = loader.load( [
+            'hsb.png', 'hsb.png',
+            'hsb.png', 'hsb.png',
+            'hsb.png', 'hsb.png'
+        ] );
+       
+
+        const cubeMaterial4 = new THREE.MeshBasicMaterial( {
+            envMap: reflectionCube,
+            combine: THREE.MultiplyOperation,
+            reflectivity: 1
+        } );
+
+const cubeMaterial3 = new THREE.MeshLambertMaterial( { color: 0xff6600, envMap: reflectionCube, combine: THREE.MixOperation, reflectivity: 0.3 } );
+				//const cubeMaterial2 = new THREE.MeshLambertMaterial( { color: 0xffee00, envMap: refractionCube, refractionRatio: 0.95 } );
+				const cubeMaterial1 = new THREE.MeshLambertMaterial( { color: 0xffffff, envMap: reflectionCube } );
+
+ const cubeMaterial = new THREE.MeshLambertMaterial( { color: 0x000000, map: texture} ) ;
+const cubeGeo =  new THREE.BoxGeometry(75,75,75 );
+    const cube = new THREE.Mesh( 
+        cubeGeo, 
+        cubeMaterial3
+    );
+    cube.position.set(0,0,0)
+    cube.rotation.z = -45 * Math.PI / 180;
+    cube.rotation.x = -35 * Math.PI / 180;
+    
+    return cube;
+}
+
 // 3x3 Group of Bars
 // Each bar is composed of a stem, a cap, and some other decorative meshes
 export const createAllBars = () => {

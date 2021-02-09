@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, } from 'react';
 import './App.css';
 
 import Scene from './components/Scene';
 import SettingsPanel from './components/SettingsPanel';
 
-import AppContext from './context';
+// import AppContext from './context';
 
 const App = () => {
   

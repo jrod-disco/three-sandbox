@@ -5,9 +5,10 @@ import { Lighting } from '../scene/Elements';
 
 
 import { 
-    createGround,
-    createAllBars,
-    createTargetCap,
+    createSimpleCube,
+    // createGround,
+    // createAllBars,
+    // createTargetCap,
 } from '../scene/Geometry';
 
 class Scene extends React.Component {
@@ -25,16 +26,16 @@ class Scene extends React.Component {
         const {height, width, showHelpers} = this.props;
 
         var scene = new THREE.Scene();
-        var camera = new THREE.PerspectiveCamera( 50, width/height, 0.1, 10000 );
+        var camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
         this.renderer = new THREE.WebGLRenderer();
-        this.renderer.shadowMapEnabled = true;
-        this.renderer.shadowMapSoft = true;
+      //  this.renderer.shadowMapEnabled = true;
+      //  this.renderer.shadowMapSoft = true;
 
         this.renderer.setSize( width, height );
 
         this.mount.appendChild( this.renderer.domElement );
 
-        camera.position.set( 0, 0, 100 );
+        camera.position.set( 0, 0, 300 );
         camera.lookAt(scene.position);
 
         const controls = new OrbitControls(camera);
@@ -43,26 +44,39 @@ class Scene extends React.Component {
         controls.minDistance = 0;
         controls.update();
 
-        const lightsObject = Lighting ({scene});
-        scene.add ( lightsObject.sceneLights );
         
-        const cameraHelper = new THREE.CameraHelper( camera );
+        const light = new THREE.AmbientLight( 0x595959 ); // soft white light
 
-        if(showHelpers){
-            scene.add ( cameraHelper );
-            scene.add ( lightsObject.sceneHelpers );
-        }
+        console.log(light)
+        scene.add( light );
+      const lightsObject = Lighting ({scene});
+      scene.add ( lightsObject.sceneLights );
+        
+    //    const cameraHelper = new THREE.CameraHelper( camera );
 
+    //     if(showHelpers){
+    //         scene.add ( cameraHelper );
+    //         scene.add ( lightsObject.sceneHelpers );
+    //     }
+
+        const simpleCube =createSimpleCube()
+        scene.add( simpleCube );
+
+      
+
+
+        /*
         scene.add( createGround() );
         scene.add( createAllBars() );
         scene.add( createTargetCap() );
+        */
 
         const animate = () =>{
             requestAnimationFrame( animate );
 
-            // required if controls.enableDamping or controls.autoRotate are set to true
-           // controls.update();
-
+             simpleCube.rotation.z -= 0.01;
+            //simpleCube.rotation.y -= 0.005;
+            
             this.renderer.render( scene, camera );
         }
         //renderer.render( scene, camera );

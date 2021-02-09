@@ -11,11 +11,11 @@ export const Lighting = (props) => {
     // Spotlight 1 --------------------
     // --------------------------------
 
-    const spotLight = new THREE.SpotLight( 0xFFFFFF, 1.5 );
+    const spotLight = new THREE.SpotLight( 0xFFFFFF, 2.5 );
     spotLight.distance = 500;
     spotLight.decay = 1.0;
 
-//    spotLight.lookAt(props.scene.position)
+ spotLight.lookAt(props.scene.position)
 
     spotLight.position.set( -100, 120, 250 );
     spotLight.target.position.set( 0, -10, -100 );
@@ -87,16 +87,16 @@ export const Lighting = (props) => {
     // Scene Helpers --------------------
     // ----------------------------------
 
-    var axeshelper = new THREE.AxesHelper( 5 );
-    sceneHelpers.add( axeshelper );
+    // var axeshelper = new THREE.AxesHelper( 5 );
+    // sceneHelpers.add( axeshelper );
 
-    var spotLightHelper = new THREE.SpotLightHelper( spotLight, 0x888888 );
-    var shadowCameraHelper = new THREE.CameraHelper( spotLight.shadow.camera );
+ //   var spotLightHelper = new THREE.SpotLightHelper( spotLight, 0x888888 );
+  //  var shadowCameraHelper = new THREE.CameraHelper( spotLight.shadow.camera );
   //  sceneHelpers.add( spotLightHelper );
   //  sceneHelpers.add( shadowCameraHelper );
 
-    var spotLightHelperTwo = new THREE.SpotLightHelper( spotLightTwo, 0xFFFF00 );
-    var shadowCameraHelperTwo = new THREE.CameraHelper( spotLightTwo.shadow.camera );
+  //  var spotLightHelperTwo = new THREE.SpotLightHelper( spotLightTwo, 0xFFFF00 );
+  //  var shadowCameraHelperTwo = new THREE.CameraHelper( spotLightTwo.shadow.camera );
    // sceneHelpers.add( spotLightHelperTwo );
    // sceneHelpers.add( shadowCameraHelperTwo );
     
