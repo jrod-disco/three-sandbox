@@ -1,14 +1,13 @@
-.App {
+body{
   background-color: #282c34;
-  color: #ffffff;
 }
-
-.Sandbox{
-  background-color: #444444;
-
+.App {
+  
+  color: #ffffff;
+  height:100%;width:100%;
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  flex-direction: row;
+  align-items: center;
+  justify-content:center;
+  flex-direction: column;
   text-align: center;
 }

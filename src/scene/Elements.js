@@ -11,16 +11,16 @@ export const Lighting = (props) => {
     // Spotlight 1 --------------------
     // --------------------------------
 
-    const spotLight = new THREE.SpotLight( 0xFFFFFF, 2.5 );
-    spotLight.distance = 500;
+    const spotLight = new THREE.SpotLight( 0xFFFFFF, 5 );
+    spotLight.distance = 100;
     spotLight.decay = 1.0;
 
  spotLight.lookAt(props.scene.position)
 
     spotLight.position.set( -100, 120, 250 );
-    spotLight.target.position.set( 0, -10, -100 );
-    spotLight.penumbra = 0.95;
-    spotLight.angle = 0.3;
+    spotLight.target.position.set( 0, 50, -60 );
+    spotLight.penumbra = 0.15;
+    spotLight.angle = .3;
 
     spotLight.castShadow = true;
 
@@ -56,8 +56,8 @@ export const Lighting = (props) => {
     spotLightTwo.shadow.camera.far = 400;
     spotLightTwo.shadow.camera.fov = 55;
 
-    sceneLights.add(spotLightTwo);
-    sceneLights.add(spotLightTwo.target);
+   //  sceneLights.add(spotLightTwo);
+   //  sceneLights.add(spotLightTwo.target);
 
 
     // Spotlight 3 --------------------
@@ -81,8 +81,8 @@ export const Lighting = (props) => {
     spotLightThree.shadow.camera.far = 400;
     spotLightThree.shadow.camera.fov = 50;
 
-    sceneLights.add(spotLightThree);
-    sceneLights.add(spotLightThree.target);
+   //  sceneLights.add(spotLightThree);
+   //  sceneLights.add(spotLightThree.target);
 
     // Scene Helpers --------------------
     // ----------------------------------

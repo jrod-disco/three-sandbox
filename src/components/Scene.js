@@ -26,16 +26,20 @@ class Scene extends React.Component {
         const {height, width, showHelpers} = this.props;
 
         var scene = new THREE.Scene();
-        var camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
+        var camera = new THREE.PerspectiveCamera( 50, 1, 1, 1000 );
         this.renderer = new THREE.WebGLRenderer();
       //  this.renderer.shadowMapEnabled = true;
       //  this.renderer.shadowMapSoft = true;
+
+      const loader = new THREE.TextureLoader();
+const bgTexture = loader.load('./img/hsb.png');
+scene.background = bgTexture;
 
         this.renderer.setSize( width, height );
 
         this.mount.appendChild( this.renderer.domElement );
 
-        camera.position.set( 0, 0, 300 );
+        camera.position.set( 0, 0, 200);
         camera.lookAt(scene.position);
 
         const controls = new OrbitControls(camera);
@@ -45,41 +49,35 @@ class Scene extends React.Component {
         controls.update();
 
         
-        const light = new THREE.AmbientLight( 0x595959 ); // soft white light
 
-        console.log(light)
-        scene.add( light );
-      const lightsObject = Lighting ({scene});
-      scene.add ( lightsObject.sceneLights );
-        
-    //    const cameraHelper = new THREE.CameraHelper( camera );
+        scene.add( new THREE.AmbientLight( 0xaaaaaa ));// soft white light
 
-    //     if(showHelpers){
-    //         scene.add ( cameraHelper );
-    //         scene.add ( lightsObject.sceneHelpers );
-    //     }
-
-        const simpleCube =createSimpleCube()
+        scene.add ( Lighting ({scene}).sceneLights );
+ 
+        const simpleCube = createSimpleCube([2,-5,0]);
         scene.add( simpleCube );
 
-      
+        const simpleCubeA = createSimpleCube([-100,0,-100]);
+        scene.add( simpleCubeA );
 
+        const simpleCubeB = createSimpleCube([100,0,-100]);
+        scene.add( simpleCubeB );
 
-        /*
-        scene.add( createGround() );
-        scene.add( createAllBars() );
-        scene.add( createTargetCap() );
-        */
 
         const animate = () =>{
             requestAnimationFrame( animate );
 
-             simpleCube.rotation.z -= 0.01;
-            //simpleCube.rotation.y -= 0.005;
+           //   simpleCube.rotation.z -= 0.005;
+              simpleCube.rotation.x -= 0.01;
+            //  simpleCube.rotation.y -= 0.001;
+
+            simpleCubeA.rotation.x += 0.005;
+            simpleCubeB.rotation.x += 0.005;
+
             
             this.renderer.render( scene, camera );
         }
-        //renderer.render( scene, camera );
+       
 
         animate();
 
@@ -95,15 +93,9 @@ class Scene extends React.Component {
         const renderScene = <div ref={ref => (this.mount = ref)} /> 
         
         return (
-            <div style={{backgroundColor:"#282c34"}}>
+            <>
                 {renderScene}
-                <div style={{margin: 10 }}>
-                    <button 
-                        onClick={this.resetScene} 
-                        style={{fontSize:14}}
-                    >Initialize Scene with Current Settings</button>
-                </div>
-            </div>
+            </>
         );
     }
 
