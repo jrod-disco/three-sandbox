@@ -38,7 +38,7 @@ scene.background = bgTexture;
         this.renderer.setSize( width, height );
 
         this.mount.appendChild( this.renderer.domElement );
-
+Í
         camera.position.set( 0, 0, 200);
         camera.lookAt(scene.position);
 
